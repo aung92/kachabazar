@@ -1,0 +1,39 @@
+{
+  "name": "কাঁচাবাজার",
+  "short_name": "কাঁচাবাজার",
+  "description": "অনলাইন কাঁচাবাজার প্রি-অর্ডার সিস্টেম - তাজা শাকসবজি, মাছ ও ফল",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "bn",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2316a34a'/%3E%3Ctext x='50' y='68' font-size='50' fill='white' text-anchor='middle'%3E🥬%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "অর্ডার করুন",
+      "short_name": "অর্ডার",
+      "description": "নতুন অর্ডার করুন",
+      "url": "/",
+      "icons": [{ "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2316a34a'/%3E%3Ctext x='50' y='68' font-size='50' fill='white' text-anchor='middle'%3E🛒%3C/text%3E%3C/svg%3E", "sizes": "any" }]
+    },
+    {
+      "name": "আমার অর্ডার",
+      "short_name": "অর্ডার লিস্ট",
+      "description": "আমার সব অর্ডার দেখুন",
+      "url": "/pages/dashboard.html",
+      "icons": [{ "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2316a34a'/%3E%3Ctext x='50' y='68' font-size='50' fill='white' text-anchor='middle'%3E📦%3C/text%3E%3C/svg%3E", "sizes": "any" }]
+    }
+  ],
+  "categories": ["shopping", "food", "lifestyle"],
+  "prefer_related_applications": false
+}

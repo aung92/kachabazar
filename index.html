@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>কাঁচাবাজার - তাজা শাকসবজি, মাছ ও ফল | অনলাইন প্রি-অর্ডার</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="তাজা শাকসবজি, সামুদ্রিক মাছ ও সিজনাল ফল প্রি-অর্ডার করুন। ঘরে বসে পণ্য পান অথবা নিকটস্থ পিকআপ পয়েন্ট থেকে সংগ্রহ করুন।">
+    <meta name="keywords" content="কাঁচাবাজার, অনলাইন সবজি, তাজা মাছ, ফল, প্রি-অর্ডার, ঢাকা">
+    <meta name="author" content="কাঁচাবাজার">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="কাঁচাবাজার - তাজা কাঁচাবাজার অনলাইন">
+    <meta property="og:description" content="তাজা শাকসবজি, মাছ ও ফল প্রি-অর্ডার করুন।">
+    <meta property="og:image" content="https://kachabazar.vercel.app/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="কাঁচাবাজার - তাজা কাঁচাবাজার অনলাইন">
+    <meta name="twitter:description" content="তাজা শাকসবজি, মাছ ও ফল প্রি-অর্ডার করুন।">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#16a34a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="কাঁচাবাজার">
+    
+    <!-- ============================================ -->
+    <!-- FONT CSS - Proper Bengali Font Support       -->
+    <!-- ============================================ -->
+    <link rel="stylesheet" href="/css/font.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'siyam': ['Siyam Rupali', 'Hind Siliguri', 'sans-serif'],
+                        'kalpurush': ['Kalpurush', 'Hind Siliguri', 'sans-serif'],
+                        'solaiman': ['SolaimanLipi', 'Noto Sans Bengali', 'sans-serif'],
+                        'hind': ['Hind Siliguri', 'Noto Sans Bengali', 'sans-serif'],
+                        'baloo': ['Baloo Da 2', 'Noto Sans Bengali', 'sans-serif'],
+                        'noto': ['Noto Sans Bengali', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper Slider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/img-error-fix.css">
+</head>
+<body class="font-kalpurush font-normal leading-normal text-dark bg-gray-50">
+
+    <!-- ============================================ -->
+    <!-- HEADER / NAVIGATION                           -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo with Siyam Rupali font -->
+                <div class="logo">
+                    <a href="/" class="flex items-center gap-2">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="14" fill="#16a34a"/>
+                            <text x="16" y="24" font-size="20" fill="white" text-anchor="middle" font-family="Arial">🥬</text>
+                        </svg>
+                        <span class="font-siyam text-xl font-bold text-green-600">কাঁচাবাজার</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="/" class="nav-link font-medium active">হোম</a></li>
+                    <li class="nav-item"><a href="/pages/products.html" class="nav-link font-medium">পণ্য</a></li>
+                    <li class="nav-item"><a href="#offers" class="nav-link font-medium">অফার</a></li>
+                    <li class="nav-item"><a href="#how-it-works" class="nav-link font-medium">কিভাবে কাজ করে</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link font-medium">যোগাযোগ</a></li>
+                </ul>
+                
+                <!-- Right Icons -->
+                <div class="nav-icons">
+                    <button class="icon-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="icon-btn cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartCount">0</span>
+                    </button>
+                    <div class="user-menu">
+                        <button class="icon-btn" id="userBtn">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="/pages/login.html" class="block px-4 py-2 hover:bg-gray-100 font-hind text-sm">লগইন</a>
+                            <a href="/pages/dashboard.html" class="block px-4 py-2 hover:bg-gray-100 font-hind text-sm">ড্যাশবোর্ড</a>
+                            <a href="/pages/vendor-dashboard.html" class="block px-4 py-2 hover:bg-gray-100 font-hind text-sm">ভেন্ডর প্যানেল</a>
+                            <a href="/pages/admin-login.html" class="block px-4 py-2 hover:bg-gray-100 font-hind text-sm">অ্যাডমিন</a>
+                        </div>
+                    </div>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="mobile-nav-menu font-hind">
+                <li><a href="/">হোম</a></li>
+                <li><a href="/pages/products.html">পণ্য</a></li>
+                <li><a href="#offers">অফার</a></li>
+                <li><a href="#how-it-works">কিভাবে কাজ করে</a></li>
+                <li><a href="#contact">যোগাযোগ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- SEARCH OVERLAY                               -->
+    <!-- ============================================ -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <button class="close-search" id="closeSearch">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="পণ্য খুঁজুন... (যেমন: পটল, ইলিশ, আম)" class="font-hind">
+                <button id="voiceSearchBtn" class="voice-search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="trending-searches">
+                <p class="font-semibold text-sm">ট্রেন্ডিং সার্চ:</p>
+                <div class="trending-tags">
+                    <span class="trending-tag font-hind text-sm">পটল</span>
+                    <span class="trending-tag font-hind text-sm">ইলিশ</span>
+                    <span class="trending-tag font-hind text-sm">আম</span>
+                    <span class="trending-tag font-hind text-sm">করলা</span>
+                    <span class="trending-tag font-hind text-sm">লইট্টা</span>
+                    <span class="trending-tag font-hind text-sm">কাঁঠাল</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION                                 -->
+    <!-- ============================================ -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-right">
+                <div class="hero-badge font-hind text-sm">
+                    <i class="fas fa-truck"></i>
+                    <span>ফ্রি ডেলিভারি*</span>
+                </div>
+                <h1 class="hero-title font-siyam">
+                    তাজা <span class="highlight font-baloo">কাঁচাবাজার</span><br>
+                    এখন আপনার <span class="highlight-mobile font-hind">মোবাইলে</span>
+                </h1>
+                <p class="hero-description font-kalpurush text-lg leading-relaxed">
+                    শাক-সবজি, সামুদ্রিক মাছ ও সিজনাল ফল প্রি-অর্ডার করুন। 
+                    ঘরে বসে পণ্য পান অথবা নিকটস্থ পিকআপ পয়েন্ট থেকে সংগ্রহ করুন।
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary font-hind font-semibold" id="orderNowBtn">
+                        <i class="fas fa-shopping-bag"></i>
+                        এখনই অর্ডার করুন
+                    </button>
+                    <button class="btn-secondary font-hind font-semibold" id="howItWorksBtn">
+                        <i class="fas fa-play"></i>
+                        কিভাবে কাজ করে
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number font-bold">৫০k+</span>
+                        <span class="stat-label font-hind text-sm">সন্তুষ্ট কাস্টমার</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number font-bold">১০০+</span>
+                        <span class="stat-label font-hind text-sm">ভেন্ডর</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number font-bold">২৪/৭</span>
+                        <span class="stat-label font-hind text-sm">সাপোর্ট</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <!-- SVG Hero Image -->
+                <svg width="450" height="380" viewBox="0 0 450 380" class="mx-auto">
+                    <rect width="450" height="380" fill="#dcfce7" rx="20"/>
+                    <text x="225" y="160" font-size="90" text-anchor="middle">🥬</text>
+                    <text x="225" y="230" font-size="28" fill="#16a34a" text-anchor="middle" font-weight="bold" font-family="Siyam Rupali, sans-serif">তাজা ও সতেজ</text>
+                    <text x="225" y="270" font-size="16" fill="#15803d" text-anchor="middle" font-family="Hind Siliguri, sans-serif">প্রতিদিন সকালে সরাসরি বাজার থেকে</text>
+                    <circle cx="120" cy="110" r="35" fill="#16a34a" opacity="0.2"/>
+                    <circle cx="330" cy="90" r="30" fill="#f59e0b" opacity="0.2"/>
+                    <circle cx="380" cy="280" r="25" fill="#3b82f6" opacity="0.2"/>
+                    <circle cx="70" cy="300" r="20" fill="#8b5cf6" opacity="0.2"/>
+                </svg>
+                
+                <!-- Floating Cards -->
+                <div class="floating-card card-1 font-hind">
+                    <i class="fas fa-carrot text-green-600"></i>
+                    <span class="text-sm font-medium">তাজা সবজি</span>
+                </div>
+                <div class="floating-card card-2 font-hind">
+                    <i class="fas fa-fish text-blue-500"></i>
+                    <span class="text-sm font-medium">সামুদ্রিক মাছ</span>
+                </div>
+                <div class="floating-card card-3 font-hind">
+                    <i class="fas fa-apple-alt text-orange-500"></i>
+                    <span class="text-sm font-medium">সিজনাল ফল</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CATEGORIES SECTION                           -->
+    <!-- ============================================ -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title font-siyam text-4xl font-bold">ব্রাউজ ক্যাটাগরি</h2>
+                <p class="section-subtitle font-hind text-gray-600 mt-2">আপনার পছন্দের ক্যাটাগরি নির্বাচন করুন</p>
+            </div>
+            <div class="categories-grid">
+                <!-- Category 1: Vegetables -->
+                <div class="category-card" data-category="vegetables" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="category-icon">
+                        <i class="fas fa-carrot text-3xl"></i>
+                    </div>
+                    <h3 class="category-name font-semibold text-xl mt-3">শাক-সবজি</h3>
+                    <p class="category-count font-hind text-gray-500">৪৫+ পণ্য</p>
+                    <button class="category-btn font-hind text-sm mt-3">ব্রাউজ করুন →</button>
+                </div>
+                
+                <!-- Category 2: Fish -->
+                <div class="category-card" data-category="fish" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="category-icon">
+                        <i class="fas fa-fish text-3xl"></i>
+                    </div>
+                    <h3 class="category-name font-semibold text-xl mt-3">সামুদ্রিক মাছ</h3>
+                    <p class="category-count font-hind text-gray-500">২৫+ পণ্য</p>
+                    <button class="category-btn font-hind text-sm mt-3">ব্রাউজ করুন →</button>
+                </div>
+                
+                <!-- Category 3: Fruits -->
+                <div class="category-card" data-category="fruits" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="category-icon">
+                        <i class="fas fa-apple-alt text-3xl"></i>
+                    </div>
+                    <h3 class="category-name font-semibold text-xl mt-3">সিজনাল ফল</h3>
+                    <p class="category-count font-hind text-gray-500">৩০+ পণ্য</p>
+                    <button class="category-btn font-hind text-sm mt-3">ব্রাউজ করুন →</button>
+                </div>
+                
+                <!-- Category 4: Custom Request -->
+                <div class="category-card" data-category="custom" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="category-icon">
+                        <i class="fas fa-box-open text-3xl"></i>
+                    </div>
+                    <h3 class="category-name font-semibold text-xl mt-3">কাস্টম রিকোয়েস্ট</h3>
+                    <p class="category-count font-hind text-gray-500">আপনার চাহিদা অনুযায়ী</p>
+                    <button class="category-btn font-hind text-sm mt-3">অর্ডার করুন →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FEATURED PRODUCTS                            -->
+    <!-- ============================================ -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title font-siyam text-4xl font-bold">জনপ্রিয় পণ্য</h2>
+                <p class="section-subtitle font-hind text-gray-600 mt-2">আজকের সবচেয়ে বেশি বিক্রি হওয়া পণ্য</p>
+                <div class="section-tabs mt-4">
+                    <button class="tab-btn active font-hind text-base" data-tab="vegetables">সবজি</button>
+                    <button class="tab-btn font-hind text-base" data-tab="fish">মাছ</button>
+                    <button class="tab-btn font-hind text-base" data-tab="fruits">ফল</button>
+                </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Product 1 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <svg width="100%" height="180" viewBox="0 0 200 180" preserveAspectRatio="none">
+                            <rect width="200" height="180" fill="#16a34a" rx="8"/>
+                            <text x="100" y="95" font-size="55" fill="white" text-anchor="middle">🥬</text>
+                            <text x="100" y="135" font-size="18" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif" font-weight="bold">পটল</text>
+                            <text x="100" y="158" font-size="13" fill="rgba(255,255,255,0.8)" text-anchor="middle">তাজা ও সতেজ</text>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name font-semibold text-lg">পটল</h3>
+                        <p class="product-price text-green-600 font-bold text-xl">৳৪০ <span class="text-sm font-normal text-gray-500">/ কেজি</span></p>
+                        <div class="product-actions">
+                            <button class="add-to-cart font-hind font-medium">কার্টে যোগ করুন</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-image">
+                        <svg width="100%" height="180" viewBox="0 0 200 180" preserveAspectRatio="none">
+                            <rect width="200" height="180" fill="#3b82f6" rx="8"/>
+                            <text x="100" y="95" font-size="55" fill="white" text-anchor="middle">🐟</text>
+                            <text x="100" y="135" font-size="18" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif" font-weight="bold">ইলিশ</text>
+                            <text x="100" y="158" font-size="13" fill="rgba(255,255,255,0.8)" text-anchor="middle">সামুদ্রিক</text>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name font-semibold text-lg">ইলিশ</h3>
+                        <p class="product-price text-green-600 font-bold text-xl">৳১২০০ <span class="text-sm font-normal text-gray-500">/ কেজি</span></p>
+                        <div class="product-actions">
+                            <button class="add-to-cart font-hind font-medium">কার্টে যোগ করুন</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-image">
+                        <svg width="100%" height="180" viewBox="0 0 200 180" preserveAspectRatio="none">
+                            <rect width="200" height="180" fill="#f59e0b" rx="8"/>
+                            <text x="100" y="95" font-size="55" fill="white" text-anchor="middle">🍎</text>
+                            <text x="100" y="135" font-size="18" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif" font-weight="bold">আম</text>
+                            <text x="100" y="158" font-size="13" fill="rgba(255,255,255,0.8)" text-anchor="middle">মৌসুমি ফল</text>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name font-semibold text-lg">আম (হিমসাগর)</h3>
+                        <p class="product-price text-green-600 font-bold text-xl">৳১২০ <span class="text-sm font-normal text-gray-500">/ কেজি</span></p>
+                        <div class="product-actions">
+                            <button class="add-to-cart font-hind font-medium">কার্টে যোগ করুন</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-image">
+                        <svg width="100%" height="180" viewBox="0 0 200 180" preserveAspectRatio="none">
+                            <rect width="200" height="180" fill="#8b5cf6" rx="8"/>
+                            <text x="100" y="95" font-size="55" fill="white" text-anchor="middle">🍆</text>
+                            <text x="100" y="135" font-size="18" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif" font-weight="bold">বেগুন</text>
+                            <text x="100" y="158" font-size="13" fill="rgba(255,255,255,0.8)" text-anchor="middle">তাজা ও সতেজ</text>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name font-semibold text-lg">বেগুন</h3>
+                        <p class="product-price text-green-600 font-bold text-xl">৳৬০ <span class="text-sm font-normal text-gray-500">/ কেজি</span></p>
+                        <div class="product-actions">
+                            <button class="add-to-cart font-hind font-medium">কার্টে যোগ করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all" data-aos="fade-up">
+                <button class="btn-outline font-hind font-semibold" id="viewAllBtn">
+                    সব পণ্য দেখুন
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW IT WORKS                                 -->
+    <!-- ============================================ -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title font-siyam text-4xl font-bold">কিভাবে কাজ করে?</h2>
+                <p class="section-subtitle font-hind text-gray-600 mt-2">৩টি সহজ ধাপে অর্ডার করুন</p>
+            </div>
+            <div class="steps-container">
+                <div class="step" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-number font-bold text-white">১</div>
+                    <div class="step-icon">
+                        <i class="fas fa-camera text-5xl text-green-600"></i>
+                    </div>
+                    <h3 class="step-title font-semibold text-xl mt-4">ছবি তুলুন</h3>
+                    <p class="step-description font-hind text-gray-600 mt-2">আপনি যেই পণ্যটি কিনতে চান তার ছবি তুলুন বা আপলোড করুন</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right text-3xl text-green-600"></i>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number font-bold text-white">২</div>
+                    <div class="step-icon">
+                        <i class="fas fa-magic text-5xl text-green-600"></i>
+                    </div>
+                    <h3 class="step-title font-semibold text-xl mt-4">অটো নাম সনাক্তকরণ</h3>
+                    <p class="step-description font-hind text-gray-600 mt-2">AI স্বয়ংক্রিয়ভাবে পণ্যের নাম বলে দেবে</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right text-3xl text-green-600"></i>
+                </div>
+                <div class="step" data-aos="fade-left" data-aos-delay="300">
+                    <div class="step-number font-bold text-white">৩</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle text-5xl text-green-600"></i>
+                    </div>
+                    <h3 class="step-title font-semibold text-xl mt-4">অর্ডার কনফার্ম করুন</h3>
+                    <p class="step-description font-hind text-gray-600 mt-2">অর্ডার কনফার্ম করুন এবং পণ্য গ্রহণ করুন</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SPECIAL OFFERS                               -->
+    <!-- ============================================ -->
+    <section class="offers" id="offers">
+        <div class="container">
+            <div class="offers-grid">
+                <div class="offer-card" data-aos="fade-right">
+                    <div class="offer-content">
+                        <span class="offer-tag font-hind text-xs">লিমিটেড অফার</span>
+                        <h3 class="offer-title font-siyam text-2xl mt-2">প্রথম অর্ডারে<br><span class="text-4xl font-bold">২০% ছাড়</span></h3>
+                        <p class="offer-desc font-hind text-sm mt-2">নতুন কাস্টমারদের জন্য বিশেষ সুযোগ</p>
+                        <button class="offer-btn font-hind font-semibold mt-3">অফারটি নিন →</button>
+                    </div>
+                    <div class="offer-image">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="white" opacity="0.3"/>
+                            <text x="60" y="78" font-size="45" fill="white" text-anchor="middle">🎁</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="offer-card" data-aos="fade-left">
+                    <div class="offer-content">
+                        <span class="offer-tag font-hind text-xs">ফ্রি ডেলিভারি</span>
+                        <h3 class="offer-title font-siyam text-2xl mt-2">৩০০০+ টাকার অর্ডারে<br><span class="text-4xl font-bold">ফ্রি ডেলিভারি</span></h3>
+                        <p class="offer-desc font-hind text-sm mt-2">সীমিত সময়ের জন্য বিশেষ সুবিধা</p>
+                        <button class="offer-btn font-hind font-semibold mt-3">অর্ডার করুন →</button>
+                    </div>
+                    <div class="offer-image">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="white" opacity="0.3"/>
+                            <text x="60" y="78" font-size="45" fill="white" text-anchor="middle">🚚</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TESTIMONIALS                                 -->
+    <!-- ============================================ -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title font-siyam text-4xl font-bold">কাস্টমারদের মতামত</h2>
+                <p class="section-subtitle font-hind text-gray-600 mt-2">৫০,০০০+ সন্তুষ্ট কাস্টমার</p>
+            </div>
+            <div class="testimonials-slider swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <!-- Testimonial 1 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating text-yellow-400 mb-3">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text font-kalpurush">"কাঁচাবাজারে অর্ডার করে খুব ভালো অভিজ্ঞতা হয়েছে। পণ্যগুলো খুব তাজা এবং ডেলিভারি সময়মতো পেয়েছি।"</p>
+                            <div class="testimonial-author mt-4">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <circle cx="25" cy="25" r="25" fill="#3b82f6"/>
+                                    <text x="25" y="35" font-size="22" fill="white" text-anchor="middle">👤</text>
+                                </svg>
+                                <div class="author-info ml-3">
+                                    <h4 class="font-semibold">শাহীন আখতার</h4>
+                                    <p class="font-hind text-sm text-gray-500">ধানমন্ডি, ঢাকা</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating text-yellow-400 mb-3">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text font-kalpurush">"ফিশ সেকশনটা দারুন! ইলিশ মাছ খুব তাজা পেলাম। অর্ডার ট্র্যাকিং সিস্টেম চমৎকার।"</p>
+                            <div class="testimonial-author mt-4">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <circle cx="25" cy="25" r="25" fill="#f59e0b"/>
+                                    <text x="25" y="35" font-size="22" fill="white" text-anchor="middle">👤</text>
+                                </svg>
+                                <div class="author-info ml-3">
+                                    <h4 class="font-semibold">মিনহাজ উদ্দিন</h4>
+                                    <p class="font-hind text-sm text-gray-500">গুলশান, ঢাকা</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating text-yellow-400 mb-3">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text font-kalpurush">"পিকআপ অপশনটা খুব উপকারী। আমার অফিসের কাছেই পিকআপ পয়েন্ট আছে, খুব সুবিধা হয়েছে।"</p>
+                            <div class="testimonial-author mt-4">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <circle cx="25" cy="25" r="25" fill="#8b5cf6"/>
+                                    <text x="25" y="35" font-size="22" fill="white" text-anchor="middle">👤</text>
+                                </svg>
+                                <div class="author-info ml-3">
+                                    <h4 class="font-semibold">নাজনীন আক্তার</h4>
+                                    <p class="font-hind text-sm text-gray-500">উত্তরা, ঢাকা</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- APP DOWNLOAD                                 -->
+    <!-- ============================================ -->
+    <section class="app-download">
+        <div class="container">
+            <div class="app-content" data-aos="fade-right">
+                <span class="app-badge font-hind text-xs">মোবাইল অ্যাপ</span>
+                <h2 class="app-title font-siyam text-3xl mt-2">অ্যাপ ডাউনলোড করুন এবং <span class="text-green-400">এক্সক্লুসিভ অফার</span> পান</h2>
+                <p class="app-desc font-hind text-gray-300 mt-3">এসএমএস, কল, হোয়াটসঅ্যাপ - সাপোর্ট পেতে এখনই অ্যাপ ইনস্টল করুন</p>
+                <div class="app-buttons mt-4">
+                    <button id="installAppBtn" class="app-btn install-btn font-hind">
+                        <i class="fab fa-google-play text-2xl"></i>
+                        <div>
+                            <small class="text-xs">GET IT ON</small>
+                            <span class="text-sm font-semibold">Google Play</span>
+                        </div>
+                    </button>
+                    <button class="app-btn font-hind">
+                        <i class="fab fa-apple text-2xl"></i>
+                        <div>
+                            <small class="text-xs">Download on the</small>
+                            <span class="text-sm font-semibold">App Store</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="app-stats mt-4 flex gap-4">
+                    <div class="stat flex items-center gap-2">
+                        <i class="fas fa-download text-green-400"></i>
+                        <span class="font-hind text-sm">১০k+ ডাউনলোড</span>
+                    </div>
+                    <div class="stat flex items-center gap-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <span class="font-hind text-sm">৪.৮ রেটিং</span>
+                    </div>
+                </div>
+            </div>
+            <div class="app-image" data-aos="fade-left">
+                <svg width="280" height="500" viewBox="0 0 280 500" class="mx-auto">
+                    <rect width="260" height="460" x="10" y="20" rx="25" fill="#1f2937"/>
+                    <rect width="240" height="420" x="20" y="50" rx="15" fill="#16a34a"/>
+                    <text x="140" y="120" font-size="40" fill="white" text-anchor="middle">🥬</text>
+                    <text x="140" y="160" font-size="20" fill="white" text-anchor="middle" font-family="Siyam Rupali, sans-serif" font-weight="bold">কাঁচাবাজার</text>
+                    <rect x="50" y="190" width="180" height="45" rx="10" fill="#15803d"/>
+                    <text x="140" y="218" font-size="14" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif">তাজা সবজি</text>
+                    <rect x="50" y="245" width="180" height="45" rx="10" fill="#15803d"/>
+                    <text x="140" y="273" font-size="14" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif">সামুদ্রিক মাছ</text>
+                    <rect x="50" y="300" width="180" height="45" rx="10" fill="#15803d"/>
+                    <text x="140" y="328" font-size="14" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif">সিজনাল ফল</text>
+                    <rect x="80" y="380" width="120" height="35" rx="8" fill="white" opacity="0.2"/>
+                    <text x="140" y="403" font-size="12" fill="white" text-anchor="middle" font-family="Hind Siliguri, sans-serif">অর্ডার করুন</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                       -->
+    <!-- ============================================ -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo flex items-center gap-2 mb-3">
+                        <i class="fas fa-leaf text-green-500 text-xl"></i>
+                        <span class="font-siyam text-xl font-bold text-white">কাঁচাবাজার</span>
+                    </div>
+                    <p class="footer-desc font-hind text-sm text-gray-400">তাজা শাক-সবজি, সামুদ্রিক মাছ ও সিজনাল ফল প্রি-অর্ডার সিস্টেম।</p>
+                    <div class="social-links mt-4 flex gap-3">
+                        <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="font-semibold text-white mb-3">কুইক লিংক</h4>
+                    <ul class="font-hind text-sm space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-green-500">হোম</a></li>
+                        <li><a href="/pages/products.html" class="text-gray-400 hover:text-green-500">পণ্য</a></li>
+                        <li><a href="#offers" class="text-gray-400 hover:text-green-500">অফার</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-green-500">কিভাবে কাজ করে</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="font-semibold text-white mb-3">সাপোর্ট</h4>
+                    <ul class="font-hind text-sm space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-500">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-500">প্রাইভেসি পলিসি</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-500">টার্মস এন্ড কন্ডিশন</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-500">ডেলিভারি তথ্য</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="font-semibold text-white mb-3">যোগাযোগ করুন</h4>
+                    <ul class="font-hind text-sm space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone w-5"></i> +৮৮০ ১২৩৪ ৫৬৭৮৯০</li>
+                        <li><i class="fas fa-envelope w-5"></i> support@kachabazar.com</li>
+                        <li><i class="fas fa-map-marker-alt w-5"></i> ঢাকা, বাংলাদেশ</li>
+                    </ul>
+                    <div class="payment-methods mt-3 flex gap-2">
+                        <span class="bg-gray-700 text-white text-xs px-2 py-1 rounded">bKash</span>
+                        <span class="bg-gray-700 text-white text-xs px-2 py-1 rounded">Nagad</span>
+                        <span class="bg-gray-700 text-white text-xs px-2 py-1 rounded">COD</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center pt-4 mt-4 border-t border-gray-800">
+                <p class="font-hind text-sm text-gray-500">&copy; ২০২৬ কাঁচাবাজার - সর্বস্বত্ব সংরক্ষিত</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- CART SIDEBAR                                 -->
+    <!-- ============================================ -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header flex justify-between items-center p-4 border-b">
+            <h3 class="font-semibold"><i class="fas fa-shopping-cart text-green-600"></i> আমার কার্ট</h3>
+            <button class="close-cart text-gray-500 hover:text-red-500" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart text-center py-8">
+                <i class="fas fa-shopping-basket text-5xl text-gray-400 mb-3"></i>
+                <p class="font-hind text-gray-500">আপনার কার্ট খালি</p>
+                <button class="btn-primary mt-3 font-hind text-sm" id="continueShopping">শপিং চালিয়ে যান</button>
+            </div>
+        </div>
+        <div class="cart-footer p-4 border-t hidden" id="cartFooter">
+            <div class="cart-total flex justify-between mb-3">
+                <span class="font-semibold">মোট মূল্য:</span>
+                <span id="cartTotal" class="font-bold text-green-600">৳০</span>
+            </div>
+            <button class="checkout-btn w-full bg-green-600 text-white py-2 rounded-lg font-hind font-semibold hover:bg-green-700 transition" id="checkoutBtn">
+                অর্ডার করুন <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- BACK TO TOP BUTTON                           -->
+    <!-- ============================================ -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+</body>
+</html>

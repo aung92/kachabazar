@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+        .login-card { background: white; border-radius: 24px; padding: 2rem; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-family: 'Hind Siliguri', sans-serif; }
+        .input-group input { width: 100%; padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 12px; font-family: 'Hind Siliguri', sans-serif; transition: all 0.2s; }
+        .input-group input:focus { outline: none; border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+        .btn-login { width: 100%; background: #16a34a; color: white; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Hind Siliguri', sans-serif; }
+        .btn-login:hover { background: #15803d; transform: translateY(-2px); }
+        .otp-group { display: none; }
+        .back-link { text-align: center; margin-top: 1rem; }
+        .back-link a { color: #16a34a; text-decoration: none; font-family: 'Hind Siliguri', sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-6">
+                <i class="fas fa-leaf text-4xl text-green-600"></i>
+                <h1 class="font-siyam text-2xl font-bold mt-2">কাঁচাবাজার</h1>
+                <p class="font-hind text-gray-500 text-sm">লগইন করে অর্ডার করুন</p>
+            </div>
+            
+            <!-- Phone Input Section -->
+            <div id="phoneSection">
+                <div class="input-group">
+                    <label class="font-hind">মোবাইল নম্বর</label>
+                    <input type="tel" id="phone" placeholder="01XXXXXXXXX" class="font-hind">
+                    <p class="text-xs text-gray-400 mt-1 font-hind">উদাহরণ: 01712345678</p>
+                </div>
+                <button class="btn-login" id="sendOtpBtn">
+                    <i class="fas fa-paper-plane"></i> OTP পাঠান
+                </button>
+            </div>
+            
+            <!-- OTP Section (Hidden initially) -->
+            <div id="otpSection" style="display: none;">
+                <div class="input-group">
+                    <label class="font-hind">OTP কোড</label>
+                    <input type="text" id="otp" placeholder="৬ ডিজিটের কোড" maxlength="6" class="font-hind text-center text-2xl tracking-widest">
+                    <p class="text-xs text-gray-400 mt-1 font-hind" id="timerText">০০:৬০ সেকেন্ড বাকি</p>
+                </div>
+                <button class="btn-login" id="verifyOtpBtn">
+                    <i class="fas fa-check-circle"></i> লগইন করুন
+                </button>
+                <button class="btn-login bg-gray-400 mt-2" id="resendOtpBtn" style="display: none;">
+                    <i class="fas fa-redo"></i> পুনরায় OTP পাঠান
+                </button>
+            </div>
+            
+            <div class="back-link">
+                <a href="/"><i class="fas fa-arrow-left"></i> হোমে ফিরুন</a>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="font-hind text-xs text-gray-400">নতুন ব্যবহারকারী? <a href="/pages/register.html" class="text-green-600">রেজিস্ট্রেশন করুন</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let countdown = null;
+        let timeLeft = 60;
+        
+        document.getElementById('sendOtpBtn').addEventListener('click', async function() {
+            const phone = document.getElementById('phone').value;
+            if (!phone || phone.length < 11) {
+                alert('সঠিক মোবাইল নম্বর দিন');
+                return;
+            }
+            
+            // Simulate OTP send
+            document.getElementById('phoneSection').style.display = 'none';
+            document.getElementById('otpSection').style.display = 'block';
+            startTimer();
+            
+            // Show demo OTP
+            alert('ডেমো মোড: আপনার OTP হলো 123456');
+        });
+        
+        document.getElementById('verifyOtpBtn').addEventListener('click', function() {
+            const otp = document.getElementById('otp').value;
+            if (otp === '123456') {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userPhone', document.getElementById('phone').value);
+                window.location.href = '/pages/dashboard.html';
+            } else {
+                alert('ভুল OTP! চেষ্টা করুন: 123456');
+            }
+        });
+        
+        document.getElementById('resendOtpBtn').addEventListener('click', function() {
+            timeLeft = 60;
+            startTimer();
+            alert('নতুন OTP পাঠানো হয়েছে। OTP: 123456');
+        });
+        
+        function startTimer() {
+            if (countdown) clearInterval(countdown);
+            timeLeft = 60;
+            updateTimerDisplay();
+            countdown = setInterval(function() {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('resendOtpBtn').style.display = 'block';
+                    document.getElementById('timerText').innerHTML = 'OTP মেয়াদ উত্তীর্ণ';
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerText').innerHTML = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} সেকেন্ড বাকি`;
+        }
+    </script>
+</body>
+</html>

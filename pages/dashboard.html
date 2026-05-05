@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ড্যাশবোর্ড - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow p-4 mb-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="font-siyam text-xl font-bold text-green-600">কাঁচাবাজার</h1>
+                    <p class="font-hind text-sm text-gray-500" id="userGreeting"></p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="window.location.href='/'" class="bg-gray-500 text-white px-3 py-1 rounded text-sm">হোম</button>
+                    <button onclick="logout()" class="bg-red-500 text-white px-3 py-1 rounded text-sm">লগআউট</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-white rounded-lg shadow p-4 text-center cursor-pointer" onclick="window.location.href='/pages/products.html'">
+                <i class="fas fa-camera text-3xl text-green-600"></i>
+                <p class="font-hind mt-2">নতুন অর্ডার</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center cursor-pointer" onclick="window.location.href='/pages/order-tracking.html'">
+                <i class="fas fa-map-marker-alt text-3xl text-blue-600"></i>
+                <p class="font-hind mt-2">ট্র্যাক অর্ডার</p>
+            </div>
+        </div>
+        
+        <!-- Recent Orders -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="p-4 border-b">
+                <h2 class="font-siyam font-bold">সাম্প্রতিক অর্ডার</h2>
+            </div>
+            <div id="ordersList" class="divide-y">
+                <div class="p-4 text-center text-gray-500 font-hind">
+                    <i class="fas fa-box-open text-2xl mb-2 block"></i>
+                    <p>কোনো অর্ডার নেই</p>
+                    <button onclick="window.location.href='/pages/products.html'" class="mt-2 bg-green-600 text-white px-4 py-1 rounded text-sm">অর্ডার করুন</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check login
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = '/pages/login.html';
+        }
+        
+        const userName = localStorage.getItem('userName') || 'কাস্টমার';
+        document.getElementById('userGreeting').innerHTML = `স্বাগতম, ${userName}!`;
+        
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            window.location.href = '/';
+        }
+
+        function repeatOrder(orderId) {
+    // Get the order details from order history
+    const order = orderHistory.find(o => o.id === orderId);
+    if (order) {
+        // Add to cart
+        let cart = JSON.parse(localStorage.getItem('kacha_cart') || '[]');
+        cart.push({ name: order.product, price: order.amount, icon: getIcon(order.product) });
+        localStorage.setItem('kacha_cart', JSON.stringify(cart));
+        alert(`${order.product} আবার কার্টে যোগ হয়েছে! চেকআউট করুন।`);
+        window.location.href = '/pages/checkout.html';
+    }
+}
+
+function getIcon(productName) {
+    const icons = { 'পটল': '🥬', 'ইলিশ': '🐟', 'আম': '🥭', 'বেগুন': '🍆' };
+    return icons[productName] || '🛒';
+}
+    </script>
+</body>
+</html>

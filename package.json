@@ -1,0 +1,16 @@
+{
+  "name": "kachabazar",
+  "version": "1.0.0",
+  "description": "অনলাইন কাঁচাবাজার প্রি-অর্ডার সিস্টেম",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "keywords": ["bengali", "grocery", "pwa", "ecommerce"],
+  "author": "KachaBazar Team",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}

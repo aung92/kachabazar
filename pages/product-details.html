@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পণ্যের বিবরণ - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-4">
+        <div class="bg-white rounded-lg shadow p-6" id="productDetail">
+            <!-- Product details will be loaded here -->
+        </div>
+        <div class="mt-4 text-center">
+            <button onclick="window.location.href='/pages/products.html'" class="text-green-600">← পণ্যের তালিকায় ফিরুন</button>
+        </div>
+    </div>
+    
+    <script>
+        const products = {
+            1: { name: 'পটল', price: 40, unit: 'কেজি', icon: '🥬', desc: 'তাজা ও সতেজ পটল। সরাসরি বাজার থেকে সংগ্রহ।', category: 'সবজি' },
+            2: { name: 'বেগুন', price: 60, unit: 'কেজি', icon: '🍆', desc: 'তাজা বেগুন। রান্নার জন্য উত্তম।', category: 'সবজি' },
+            3: { name: 'করলা', price: 50, unit: 'কেজি', icon: '🥒', desc: 'টাটকা করলা।', category: 'সবজি' },
+            4: { name: 'ইলিশ', price: 1200, unit: 'কেজি', icon: '🐟', desc: 'রুপালি ইলিশ। সামুদ্রিক তাজা মাছ।', category: 'মাছ' },
+            5: { name: 'লইট্টা', price: 400, unit: 'কেজি', icon: '🐠', desc: 'তাজা লইট্টা মাছ।', category: 'মাছ' },
+            6: { name: 'আম', price: 120, unit: 'কেজি', icon: '🥭', desc: 'মৌসুমি মিষ্টি আম।', category: 'ফল' },
+        };
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        const product = products[productId];
+        
+        if (product) {
+            document.getElementById('productDetail').innerHTML = `
+                <div class="text-center">
+                    <span class="text-8xl">${product.icon}</span>
+                    <h1 class="font-siyam text-3xl font-bold mt-4">${product.name}</h1>
+                    <p class="text-gray-500 font-hind mt-2">${product.category}</p>
+                    <div class="text-green-600 text-3xl font-bold my-4">৳${product.price} <span class="text-base">/${product.unit}</span></div>
+                    <p class="font-hind text-gray-600 my-4">${product.desc}</p>
+                    <div class="flex gap-3">
+                        <button onclick="addToCart()" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold">কার্টে যোগ করুন</button>
+                        <button onclick="buyNow()" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold">এখনই কিনুন</button>
+                    </div>
+                </div>
+            `;
+        } else {
+            document.getElementById('productDetail').innerHTML = '<p class="text-center">পণ্য পাওয়া যায়নি</p>';
+        }
+        
+        function addToCart() {
+            let cart = JSON.parse(localStorage.getItem('kacha_cart') || '[]');
+            cart.push(product);
+            localStorage.setItem('kacha_cart', JSON.stringify(cart));
+            alert(`${product.name} কার্টে যোগ হয়েছে`);
+        }
+        
+        function buyNow() {
+            addToCart();
+            window.location.href = '/pages/checkout.html';
+        }
+    </script>
+</body>
+</html>

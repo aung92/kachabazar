@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- ============================================ -->
+<!-- FILE: pages/order-cancel.html                 -->
+<!-- PURPOSE: কাস্টমার অর্ডার ক্যান্সেল করতে পারে    -->
+<!-- AUTHOR: KachaBazar Team                       -->
+<!-- VERSION: 1.0.0                                -->
+<!-- LAST UPDATED: 2026-05-05                      -->
+<!-- ============================================ -->
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অর্ডার ক্যান্সেল - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-4">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h1 class="font-siyam text-2xl font-bold text-center text-red-600">
+                <i class="fas fa-ban"></i> অর্ডার ক্যান্সেল
+            </h1>
+            <p class="text-center text-gray-500 mt-1">আপনার অর্ডার ক্যান্সেল করতে নিচের তথ্য দিন</p>
+            
+            <div class="mt-6 space-y-4">
+                <div>
+                    <label class="block font-hind text-sm">অর্ডার আইডি</label>
+                    <input type="text" id="orderId" class="w-full border rounded-lg p-2" placeholder="যেমন: ORD-001">
+                </div>
+                <div>
+                    <label class="block font-hind text-sm">ক্যান্সেল করার কারণ</label>
+                    <select id="cancelReason" class="w-full border rounded-lg p-2">
+                        <option value="মনে আর ভালো লাগছে না">মনে আর ভালো লাগছে না</option>
+                        <option value="ভুল পণ্য অর্ডার করেছি">ভুল পণ্য অর্ডার করেছি</option>
+                        <option value="অন্য কোথাও কম পেয়েছি">অন্য কোথাও কম পেয়েছি</option>
+                        <option value="ডেলিভারি সময় বেশি লাগছে">ডেলিভারি সময় বেশি লাগছে</option>
+                        <option value="অন্যান্য কারণ">অন্যান্য কারণ</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-hind text-sm">বিস্তারিত (ঐচ্ছিক)</label>
+                    <textarea id="cancelDetails" rows="3" class="w-full border rounded-lg p-2" placeholder="আরো কিছু জানাতে চাইলে লিখুন..."></textarea>
+                </div>
+                
+                <button onclick="cancelOrder()" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold">
+                    <i class="fas fa-check-circle"></i> অর্ডার ক্যান্সেল করুন
+                </button>
+                
+                <div class="text-center">
+                    <a href="/pages/dashboard.html" class="text-green-600 text-sm">
+                        <i class="fas fa-arrow-left"></i> ড্যাশবোর্ডে ফিরুন
+                    </a>
+                </div>
+                
+                <!-- Refund Info -->
+                <div class="bg-yellow-50 p-3 rounded-lg mt-4">
+                    <p class="text-sm text-yellow-800 font-hind">
+                        <i class="fas fa-info-circle"></i> অর্ডার ক্যান্সেল করলে টাকা ফেরত দেওয়া হবে (পেমেন্ট মেথড অনুযায়ী ৩-৫ কর্মদিবস সময় লাগতে পারে)
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- My Orders List -->
+        <div class="bg-white rounded-lg shadow mt-4">
+            <div class="p-3 border-b">
+                <h3 class="font-semibold"><i class="fas fa-list"></i> আমার চলমান অর্ডার</h3>
+            </div>
+            <div id="activeOrdersList" class="divide-y">
+                <!-- Active orders will be loaded -->
+                <div class="p-3 text-center text-gray-500">কোনো চলমান অর্ডার নেই</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Demo active orders
+        let activeOrders = [
+            { id: 'ORD-005', product: 'ইলিশ', amount: 1200, status: 'pending', date: '২০২৬-০৫-০৫' },
+            { id: 'ORD-006', product: 'আম - হিমসাগর', amount: 360, status: 'confirmed', date: '২০২৬-০৫-০৪' }
+        ];
+        
+        function loadActiveOrders() {
+            const container = document.getElementById('activeOrdersList');
+            if (activeOrders.length === 0) {
+                container.innerHTML = '<div class="p-3 text-center text-gray-500">কোনো চলমান অর্ডার নেই</div>';
+                return;
+            }
+            container.innerHTML = activeOrders.map(order => `
+                <div class="p-3 flex justify-between items-center hover:bg-gray-50">
+                    <div>
+                        <p class="font-semibold">${order.product}</p>
+                        <p class="text-xs text-gray-500">${order.id} | ${order.date}</p>
+                        <span class="text-xs px-2 py-0.5 rounded ${order.status === 'pending' ? 'bg-yellow-100' : 'bg-blue-100'}">${order.status === 'pending' ? 'পেন্ডিং' : 'কনফার্ম'}</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-green-600">৳${order.amount}</p>
+                        <button onclick="fillOrderId('${order.id}')" class="text-red-600 text-sm">ক্যান্সেল</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function fillOrderId(orderId) {
+            document.getElementById('orderId').value = orderId;
+            document.getElementById('orderId').focus();
+        }
+        
+        function cancelOrder() {
+            const orderId = document.getElementById('orderId').value;
+            const reason = document.getElementById('cancelReason').value;
+            const details = document.getElementById('cancelDetails').value;
+            
+            if (!orderId) {
+                alert('অর্ডার আইডি দিন');
+                return;
+            }
+            
+            if (confirm(`"${orderId}" অর্ডারটি ক্যান্সেল করতে চান?`)) {
+                // Remove from active orders
+                activeOrders = activeOrders.filter(o => o.id !== orderId);
+                loadActiveOrders();
+                
+                alert(`✅ অর্ডার ${orderId} সফলভাবে ক্যান্সেল করা হয়েছে।\nকারণ: ${reason}\nটাকা ফেরত দেওয়া হবে ৩-৫ কর্মদিবসের মধ্যে।`);
+                
+                // Clear form
+                document.getElementById('orderId').value = '';
+                document.getElementById('cancelDetails').value = '';
+            }
+        }
+        
+        loadActiveOrders();
+    </script>
+</body>
+</html>

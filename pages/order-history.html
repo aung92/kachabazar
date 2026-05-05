@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>অর্ডার হিস্ট্রি</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto p-4"><div class="bg-white rounded-lg shadow"><div class="p-4 border-b bg-green-50"><h1 class="font-siyam text-xl font-bold text-green-600"><i class="fas fa-history"></i> অর্ডার হিস্ট্রি</h1></div><div id="historyList" class="divide-y"></div></div><div class="mt-4 text-center"><a href="/pages/dashboard.html" class="text-green-600">← ড্যাশবোর্ডে ফিরুন</a></div></div>
+    <script>const orders=[{id:'ORD-001',date:'০৫ মে, ২০২৬',product:'পটল',amount:80,status:'delivered'},{id:'ORD-002',date:'০৪ মে, ২০২৬',product:'ইলিশ',amount:1200,status:'delivered'},{id:'ORD-003',date:'০৩ মে, ২০২৬',product:'আম',amount:360,status:'cancelled'}];document.getElementById('historyList').innerHTML=orders.map(o=>`<div class="p-4 flex justify-between items-center"><div><p class="font-semibold">${o.product}</p><p class="text-xs text-gray-500">${o.id} | ${o.date}</p></div><div class="text-right"><p class="font-bold text-green-600">৳${o.amount}</p><span class="text-xs px-2 py-1 rounded ${o.status==='delivered'?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}">${o.status==='delivered'?'ডেলিভারি সম্পন্ন':'বাতিল'}</span></div></div>`).join('');</script>
+</body>
+</html>

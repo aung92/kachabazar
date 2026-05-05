@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>কাস্টম অর্ডার</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-4"><div class="bg-white rounded-lg shadow p-6"><h1 class="font-siyam text-2xl font-bold text-center">📝 কাস্টম অর্ডার</h1><p class="text-center text-gray-500 mt-1">আপনার প্রয়োজনীয় পণ্যের বিবরণ দিন</p>
+    <div class="mt-6 space-y-4"><div><label class="block font-hind">পণ্যের নাম</label><input type="text" id="productName" placeholder="যেমন: দেশি মুরগি, জারি আম" class="w-full border rounded-lg p-2"></div>
+    <div><label class="block font-hind">পরিমাণ</label><input type="text" id="quantity" placeholder="যেমন: ২ কেজি, ৫ পিস" class="w-full border rounded-lg p-2"></div>
+    <div><label class="block font-hind">অতিরিক্ত তথ্য</label><textarea id="details" rows="3" placeholder="বিশেষ কোনো প্রয়োজন থাকলে লিখুন..." class="w-full border rounded-lg p-2"></textarea></div>
+    <div><label class="block font-hind">ছবি আপলোড (ঐচ্ছিক)</label><input type="file" id="imageUpload" accept="image/*" class="w-full border rounded-lg p-2"></div>
+    <button onclick="submitCustomOrder()" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold">অর্ডার সাবমিট করুন</button></div>
+    <div class="mt-4 text-center"><a href="/pages/dashboard.html" class="text-green-600"><i class="fas fa-arrow-left"></i> ড্যাশবোর্ডে ফিরুন</a></div></div></div>
+    <script>function submitCustomOrder(){const name=document.getElementById('productName').value;if(!name){alert('পণ্যের নাম দিন');return;}alert(`"${name}" আপনার কাস্টম অর্ডারটি ভেন্ডরের কাছে পাঠানো হয়েছে। শীঘ্রই যোগাযোগ করা হবে।`);window.location.href='/pages/dashboard.html';}</script>
+</body>
+</html>

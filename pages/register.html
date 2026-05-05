@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেজিস্ট্রেশন - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .register-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+        .register-card { background: white; border-radius: 24px; padding: 2rem; width: 100%; max-width: 480px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-family: 'Hind Siliguri', sans-serif; }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 12px; font-family: 'Hind Siliguri', sans-serif; }
+        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: #16a34a; }
+        .btn-register { width: 100%; background: #16a34a; color: white; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; }
+        .btn-register:hover { background: #15803d; }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="text-center mb-6">
+                <i class="fas fa-user-plus text-4xl text-green-600"></i>
+                <h1 class="font-siyam text-2xl font-bold mt-2">নতুন একাউন্ট</h1>
+                <p class="font-hind text-gray-500">রেজিস্ট্রেশন করে অর্ডার করুন</p>
+            </div>
+            
+            <div class="input-group">
+                <label class="font-hind">আপনার নাম</label>
+                <input type="text" id="fullName" placeholder="আপনার পুরো নাম" class="font-hind">
+            </div>
+            <div class="input-group">
+                <label class="font-hind">মোবাইল নম্বর</label>
+                <input type="tel" id="phone" placeholder="01XXXXXXXXX" class="font-hind">
+            </div>
+            <div class="input-group">
+                <label class="font-hind">ঠিকানা</label>
+                <textarea id="address" rows="2" placeholder="আপনার ডেলিভারি ঠিকানা" class="font-hind"></textarea>
+            </div>
+            <div class="input-group">
+                <label class="font-hind">পাসওয়ার্ড</label>
+                <input type="password" id="password" placeholder="পাসওয়ার্ড দিন" class="font-hind">
+            </div>
+            <div class="input-group">
+                <label class="font-hind">পাসওয়ার্ড নিশ্চিত করুন</label>
+                <input type="password" id="confirmPassword" placeholder="আবার পাসওয়ার্ড দিন" class="font-hind">
+            </div>
+            
+            <button class="btn-register" id="registerBtn">
+                <i class="fas fa-user-check"></i> রেজিস্ট্রেশন করুন
+            </button>
+            
+            <div class="text-center mt-4">
+                <p class="font-hind text-sm">ইতিমধ্যে একাউন্ট আছে? <a href="/pages/login.html" class="text-green-600">লগইন করুন</a></p>
+                <a href="/" class="text-gray-400 text-sm block mt-2"><i class="fas fa-arrow-left"></i> হোমে ফিরুন</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            if (!name || !phone || !address || !password) {
+                alert('সব তথ্য পূরণ করুন');
+                return;
+            }
+            if (password !== confirm) {
+                alert('পাসওয়ার্ড মিলছে না');
+                return;
+            }
+            
+            // Save to localStorage (demo)
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userAddress', address);
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            alert('রেজিস্ট্রেশন সফল! লগইন পেজে যাচ্ছেন...');
+            window.location.href = '/pages/login.html';
+        });
+    </script>
+</body>
+</html>

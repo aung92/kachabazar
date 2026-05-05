@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>রিপোর্ট</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="flex"><div class="w-64 bg-green-800 text-white min-h-screen p-4"><div class="text-center mb-8"><i class="fas fa-leaf text-3xl"></i><h1 class="font-siyam text-xl">অ্যাডমিন</h1></div><nav class="space-y-2"><a href="/pages/admin-dashboard.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</a><a href="/pages/admin-reports.html" class="block p-2 rounded bg-green-700"><i class="fas fa-chart-line"></i> রিপোর্ট</a><a href="#" onclick="logout()" class="block p-2 rounded hover:bg-red-600 mt-4"><i class="fas fa-sign-out-alt"></i> লগআউট</a></nav></div>
+        <div class="flex-1 p-6"><h1 class="font-siyam text-2xl font-bold">📊 রিপোর্ট ও অ্যানালিটিক্স</h1><div class="grid grid-cols-2 gap-4 mt-4"><div class="bg-white p-4 rounded shadow"><h3 class="font-semibold">মাসিক সেলস রিপোর্ট</h3><p class="text-2xl font-bold text-green-600">৳১,২৫,৬০০</p><p>মে ২০২৬</p><button class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm">PDF ডাউনলোড</button></div><div class="bg-white p-4 rounded shadow"><h3 class="font-semibold">ক্যাটাগরি ভিত্তিক বিক্রয়</h3><p>সবজি: ৫২%</p><p>মাছ: ২৮%</p><p>ফল: ২০%</p></div></div><div class="bg-white rounded shadow mt-4 p-4"><h3 class="font-semibold">টপ ভেন্ডর</h3><p>১. জনাব ভেন্ডর - ৪৫টি অর্ডার</p><p>২. মাছ ব্যবসায়ী - ৩২টি অর্ডার</p></div></div></div>
+    <script>if(localStorage.getItem('adminLoggedIn')!=='true')window.location.href='/pages/admin-login.html';function logout(){localStorage.removeItem('adminLoggedIn');window.location.href='/';}</script>
+</body>
+</html>

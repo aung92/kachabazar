@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পণ্য - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-card { transition: all 0.3s; cursor: pointer; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-6xl mx-auto p-4">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow p-4 mb-4 flex justify-between items-center">
+            <h1 class="font-siyam text-2xl font-bold text-green-600">🍅 পণ্যের তালিকা</h1>
+            <button onclick="window.location.href='/'" class="bg-gray-500 text-white px-3 py-1 rounded text-sm">হোম</button>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="bg-white rounded-lg shadow p-3 mb-4">
+            <div class="flex gap-2">
+                <input type="text" id="searchInput" placeholder="পণ্য খুঁজুন..." class="flex-1 border rounded-lg px-4 py-2 font-hind">
+                <button class="bg-green-600 text-white px-4 rounded-lg" onclick="searchProducts()">খুঁজুন</button>
+            </div>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+            <button class="cat-btn px-4 py-2 rounded-full bg-green-600 text-white" data-cat="all">সব</button>
+            <button class="cat-btn px-4 py-2 rounded-full bg-gray-200" data-cat="vegetables">সবজি</button>
+            <button class="cat-btn px-4 py-2 rounded-full bg-gray-200" data-cat="fish">মাছ</button>
+            <button class="cat-btn px-4 py-2 rounded-full bg-gray-200" data-cat="fruits">ফল</button>
+        </div>
+        
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Products will be loaded here -->
+        </div>
+    </div>
+    
+    <script>
+        const products = [
+            { id: 1, name: 'পটল', price: 40, unit: 'কেজি', category: 'vegetables', icon: '🥬', color: '#16a34a' },
+            { id: 2, name: 'বেগুন', price: 60, unit: 'কেজি', category: 'vegetables', icon: '🍆', color: '#8b5cf6' },
+            { id: 3, name: 'করলা', price: 50, unit: 'কেজি', category: 'vegetables', icon: '🥒', color: '#f59e0b' },
+            { id: 4, name: 'ইলিশ', price: 1200, unit: 'কেজি', category: 'fish', icon: '🐟', color: '#3b82f6' },
+            { id: 5, name: 'লইট্টা', price: 400, unit: 'কেজি', category: 'fish', icon: '🐠', color: '#3b82f6' },
+            { id: 6, name: 'আম', price: 120, unit: 'কেজি', category: 'fruits', icon: '🥭', color: '#f59e0b' },
+            { id: 7, name: 'কাঁঠাল', price: 80, unit: 'কেজি', category: 'fruits', icon: '🍈', color: '#f59e0b' },
+            { id: 8, name: 'ঢেঁড়স', price: 45, unit: 'কেজি', category: 'vegetables', icon: '🌿', color: '#16a34a' },
+        ];
+        
+        let currentCategory = 'all';
+        
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            let filtered = products;
+            if (currentCategory !== 'all') {
+                filtered = products.filter(p => p.category === currentCategory);
+            }
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card bg-white rounded-lg shadow overflow-hidden" onclick="viewProduct(${p.id})">
+                    <div class="h-36 flex items-center justify-center" style="background: ${p.color}20">
+                        <span class="text-5xl">${p.icon}</span>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="font-semibold font-hind">${p.name}</h3>
+                        <p class="text-green-600 font-bold">৳${p.price} <span class="text-xs text-gray-500">/${p.unit}</span></p>
+                        <button class="mt-2 w-full bg-green-600 text-white py-1 rounded text-sm" onclick="event.stopPropagation(); addToCart(${p.id})">কার্টে যোগ করুন</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function viewProduct(id) {
+            window.location.href = `/pages/product-details.html?id=${id}`;
+        }
+        
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            let cart = JSON.parse(localStorage.getItem('kacha_cart') || '[]');
+            cart.push(product);
+            localStorage.setItem('kacha_cart', JSON.stringify(cart));
+            alert(`${product.name} কার্টে যোগ হয়েছে`);
+        }
+        
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const grid = document.getElementById('productsGrid');
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white rounded-lg shadow p-3">
+                    <span class="text-3xl">${p.icon}</span>
+                    <h3 class="font-semibold">${p.name}</h3>
+                    <p class="text-green-600">৳${p.price}</p>
+                </div>
+            `).join('');
+        }
+        
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('bg-green-600', 'text-white'));
+                this.classList.add('bg-green-600', 'text-white');
+                currentCategory = this.dataset.cat;
+                renderProducts();
+            });
+        });
+        
+        renderProducts();
+    </script>
+</body>
+</html>

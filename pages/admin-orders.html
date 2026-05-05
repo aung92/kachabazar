@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>অর্ডার ব্যবস্থাপনা</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <div class="w-64 bg-green-800 text-white min-h-screen p-4">
+            <div class="text-center mb-8"><i class="fas fa-leaf text-3xl"></i><h1 class="font-siyam text-xl">অ্যাডমিন</h1></div>
+            <nav class="space-y-2"><a href="/pages/admin-dashboard.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</a><a href="/pages/admin-orders.html" class="block p-2 rounded bg-green-700"><i class="fas fa-shopping-cart"></i> অর্ডার</a><a href="/pages/admin-vendors.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-store"></i> ভেন্ডর</a><a href="/pages/admin-products.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-box"></i> পণ্য</a><a href="#" onclick="logout()" class="block p-2 rounded hover:bg-red-600 mt-4"><i class="fas fa-sign-out-alt"></i> লগআউট</a></nav>
+        </div>
+        <div class="flex-1 p-6">
+            <h1 class="font-siyam text-2xl font-bold">📦 অর্ডার ব্যবস্থাপনা</h1>
+            <div class="bg-white rounded shadow mt-4 overflow-x-auto"><table class="w-full"><thead class="bg-gray-50"><tr><th class="p-3">অর্ডার আইডি</th><th>কাস্টমার</th><th>পণ্য</th><th>মোট</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead><tbody id="orderList"><tr><td colspan="6" class="p-8 text-center">লোড হচ্ছে...</td></tr></tbody></table></div>
+        </div>
+    </div>
+    <script>
+        if (localStorage.getItem('adminLoggedIn') !== 'true') window.location.href = '/pages/admin-login.html';
+        const orders = [{id:'ORD-001',customer:'শাহীন',product:'পটল',amount:80,status:'pending'},{id:'ORD-002',customer:'মিনহাজ',product:'ইলিশ',amount:1200,status:'confirmed'}];
+        document.getElementById('orderList').innerHTML = orders.map(o => `<tr><td class="p-3">${o.id}</td><td>${o.customer}</td><td>${o.product}</td><td>৳${o.amount}</td><td><span class="px-2 py-1 rounded text-xs ${o.status==='pending'?'bg-yellow-100':o.status==='confirmed'?'bg-blue-100':'bg-green-100'}">${o.status}</span></td><td><button onclick="updateStatus('${o.id}')" class="text-green-600">আপডেট</button></td></tr>`).join('');
+        function updateStatus(id){alert(`অর্ডার ${id} স্ট্যাটাস আপডেট`);}
+        function logout(){localStorage.removeItem('adminLoggedIn');window.location.href='/';}
+    </script>
+</body>
+</html>

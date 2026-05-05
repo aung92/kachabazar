@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>আমার প্রোফাইল - কাঁচাবাজার</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-4">
+        <div class="bg-white rounded-lg shadow">
+            <div class="bg-green-600 text-white p-4 rounded-t-lg"><h1 class="font-siyam text-xl"><i class="fas fa-user-circle"></i> আমার প্রোফাইল</h1></div>
+            <div class="p-6 text-center">
+                <div class="w-24 h-24 bg-green-100 rounded-full flex mx-auto"><i class="fas fa-user text-5xl text-green-600 m-auto"></i></div>
+                <h2 id="displayName" class="font-siyam text-2xl mt-3">কাস্টমার</h2>
+                <p id="displayPhone" class="text-gray-500">+8801XXXXXXXXX</p>
+                <p id="displayAddress" class="text-gray-500 mt-1">ঢাকা, বাংলাদেশ</p>
+                <div class="grid grid-cols-3 gap-3 mt-6 text-center">
+                    <div><p class="text-2xl font-bold text-green-600" id="totalOrders">0</p><p class="text-xs">মোট অর্ডার</p></div>
+                    <div><p class="text-2xl font-bold text-green-600" id="totalSpent">৳০</p><p class="text-xs">মোট খরচ</p></div>
+                    <div><p class="text-2xl font-bold text-green-600" id="memberSince">-</p><p class="text-xs">সদস্য</p></div>
+                </div>
+                <div class="mt-6 flex gap-3"><button onclick="window.location.href='/pages/profile-edit.html'" class="flex-1 bg-green-600 text-white py-2 rounded">প্রোফাইল এডিট করুন</button><button onclick="window.location.href='/pages/change-password.html'" class="flex-1 bg-blue-600 text-white py-2 rounded">পাসওয়ার্ড পরিবর্তন</button></div>
+                <div class="mt-4"><a href="/pages/dashboard.html" class="text-green-600 text-sm">← ড্যাশবোর্ডে ফিরুন</a></div>
+            </div>
+        </div>
+    </div>
+    <script>const userData=JSON.parse(localStorage.getItem('kacha_user')||'{"name":"কাস্টমার","phone":"+8801712345678","address":"ঢাকা, বাংলাদেশ","memberSince":"জানুয়ারি ২০২৬","totalOrders":12,"totalSpent":3450}');document.getElementById('displayName').innerText=userData.name;document.getElementById('displayPhone').innerText=userData.phone;document.getElementById('displayAddress').innerText=userData.address;document.getElementById('totalOrders').innerText=userData.totalOrders;document.getElementById('totalSpent').innerText=`৳${userData.totalSpent}`;document.getElementById('memberSince').innerText=userData.memberSince;</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পণ্য ব্যবস্থাপনা - ভেন্ডর</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="font-siyam text-xl"><i class="fas fa-box"></i> পণ্য ব্যবস্থাপনা</h1>
+            <button onclick="window.location.href='/pages/vendor-dashboard.html'" class="bg-white/20 px-3 py-1 rounded text-sm">
+                <i class="fas fa-arrow-left"></i> ড্যাশবোর্ড
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-4">
+        <!-- Add Product Button -->
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="font-siyam text-xl font-bold">📦 আমার পণ্য</h2>
+            <button onclick="openAddProductModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg">
+                <i class="fas fa-plus"></i> নতুন পণ্য যোগ করুন
+            </button>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000;">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-auto mt-20">
+            <h3 id="modalTitle" class="font-siyam text-xl font-bold mb-4">নতুন পণ্য যোগ করুন</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="block font-hind text-sm">পণ্যের নাম</label>
+                    <input type="text" id="productName" class="w-full border rounded-lg p-2" placeholder="যেমন: পটল, ইলিশ">
+                </div>
+                <div>
+                    <label class="block font-hind text-sm">মূল্য (৳)</label>
+                    <input type="number" id="productPrice" class="w-full border rounded-lg p-2" placeholder="যেমন: ৪০">
+                </div>
+                <div>
+                    <label class="block font-hind text-sm">ক্যাটাগরি</label>
+                    <select id="productCategory" class="w-full border rounded-lg p-2">
+                        <option value="vegetables">শাক-সবজি</option>
+                        <option value="fish">সামুদ্রিক মাছ</option>
+                        <option value="fruits">সিজনাল ফল</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-hind text-sm">স্টক পরিমাণ</label>
+                    <input type="number" id="productStock" class="w-full border rounded-lg p-2" value="10">
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button onclick="saveProduct()" class="flex-1 bg-green-600 text-white py-2 rounded">সংরক্ষণ করুন</button>
+                    <button onclick="closeModal()" class="flex-1 bg-gray-400 text-white py-2 rounded">বাতিল</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo products data
+        let vendorProducts = [
+            { id: 1, name: 'পটল', price: 40, category: 'vegetables', stock: 50, icon: '🥬' },
+            { id: 2, name: 'বেগুন', price: 60, category: 'vegetables', stock: 30, icon: '🍆' },
+            { id: 3, name: 'ইলিশ', price: 1200, category: 'fish', stock: 15, icon: '🐟' }
+        ];
+        
+        let editId = null;
+        
+        // Render products function
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = vendorProducts.map(p => `
+                <div class="product-card bg-white rounded-lg shadow p-3">
+                    <div class="text-center"><span class="text-4xl">${p.icon}</span></div>
+                    <h3 class="font-semibold text-center mt-2">${p.name}</h3>
+                    <p class="text-green-600 font-bold text-center">৳${p.price}</p>
+                    <p class="text-xs text-center text-gray-500">স্টক: ${p.stock}</p>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="editProduct(${p.id})" class="flex-1 bg-blue-500 text-white py-1 rounded text-sm">
+                            <i class="fas fa-edit"></i> এডিট
+                        </button>
+                        <button onclick="deleteProduct(${p.id})" class="flex-1 bg-red-500 text-white py-1 rounded text-sm">
+                            <i class="fas fa-trash"></i> ডিলিট
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Open add product modal
+        function openAddProductModal() {
+            editId = null;
+            document.getElementById('modalTitle').innerHTML = 'নতুন পণ্য যোগ করুন';
+            clearForm();
+            document.getElementById('productModal').style.display = 'block';
+        }
+        
+        // Edit product
+        function editProduct(id) {
+            editId = id;
+            const p = vendorProducts.find(p => p.id === id);
+            document.getElementById('productName').value = p.name;
+            document.getElementById('productPrice').value = p.price;
+            document.getElementById('productCategory').value = p.category;
+            document.getElementById('productStock').value = p.stock;
+            document.getElementById('modalTitle').innerHTML = 'পণ্য এডিট করুন';
+            document.getElementById('productModal').style.display = 'block';
+        }
+        
+        // Save product (add or update)
+        function saveProduct() {
+            const name = document.getElementById('productName').value;
+            const price = parseInt(document.getElementById('productPrice').value);
+            const category = document.getElementById('productCategory').value;
+            const stock = parseInt(document.getElementById('productStock').value);
+            
+            if (!name || !price) {
+                alert('সব তথ্য পূরণ করুন');
+                return;
+            }
+            
+            const icons = { vegetables: '🥬', fish: '🐟', fruits: '🍎' };
+            
+            if (editId) {
+                // Update existing product
+                const index = vendorProducts.findIndex(p => p.id === editId);
+                vendorProducts[index] = { 
+                    ...vendorProducts[index], 
+                    name, price, category, stock, 
+                    icon: icons[category] 
+                };
+                alert('পণ্য আপডেট করা হয়েছে');
+            } else {
+                // Add new product
+                const newId = Date.now();
+                vendorProducts.push({ 
+                    id: newId, name, price, category, stock, 
+                    icon: icons[category] 
+                });
+                alert('নতুন পণ্য যোগ করা হয়েছে');
+            }
+            
+            closeModal();
+            renderProducts();
+        }
+        
+        // Delete product
+        function deleteProduct(id) {
+            if (confirm('পণ্য ডিলিট করতে চান?')) {
+                vendorProducts = vendorProducts.filter(p => p.id !== id);
+                renderProducts();
+                alert('পণ্য ডিলিট করা হয়েছে');
+            }
+        }
+        
+        function clearForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productCategory').value = 'vegetables';
+            document.getElementById('productStock').value = '10';
+        }
+        
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+        
+        renderProducts();
+    </script>
+</body>
+</html>

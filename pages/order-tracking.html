@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অর্ডার ট্র্যাকিং - কাঁচাবাজার</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto p-4">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h1 class="font-siyam text-2xl font-bold text-center">📍 অর্ডার ট্র্যাকিং</h1>
+            
+            <div class="mt-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div class="flex-1">
+                        <p class="font-semibold">অর্ডার প্লেস করা হয়েছে</p>
+                        <p class="text-sm text-gray-500">আপনার অর্ডার রিসিভ করা হয়েছে</p>
+                    </div>
+                    <span class="text-green-600"><i class="fas fa-check-circle"></i></span>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="flex-1">
+                        <p class="font-semibold">অর্ডার কনফার্ম</p>
+                        <p class="text-sm text-gray-500">ভেন্ডর অর্ডার গ্রহণ করেছেন</p>
+                    </div>
+                    <span class="text-yellow-500"><i class="fas fa-spinner fa-pulse"></i></span>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                    <div class="flex-1">
+                        <p class="font-semibold">প্রস্তুত করা হচ্ছে</p>
+                        <p class="text-sm text-gray-500">আপনার পণ্য প্রস্তুত করা হচ্ছে</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                    <div class="flex-1">
+                        <p class="font-semibold">ডেলিভারি চলছে</p>
+                        <p class="text-sm text-gray-500">ডেলিভারি ম্যান আপনার পণ্য নিয়ে আসছেন</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button onclick="window.location.href='/pages/dashboard.html'" class="bg-green-600 text-white px-6 py-2 rounded">ড্যাশবোর্ডে ফিরুন</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

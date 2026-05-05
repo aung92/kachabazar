@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন ড্যাশবোর্ড</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-green-800 text-white min-h-screen p-4">
+            <div class="text-center mb-8"><i class="fas fa-leaf text-3xl"></i><h1 class="font-siyam text-xl">কাঁচাবাজার</h1><p class="text-xs">অ্যাডমিন</p></div>
+            <nav class="space-y-2">
+                <a href="/pages/admin-dashboard.html" class="block p-2 rounded bg-green-700"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</a>
+                <a href="/pages/admin-orders.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-shopping-cart"></i> অর্ডার</a>
+                <a href="/pages/admin-vendors.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-store"></i> ভেন্ডর</a>
+                <a href="/pages/admin-products.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-box"></i> পণ্য</a>
+                <a href="/pages/admin-reports.html" class="block p-2 rounded hover:bg-green-700"><i class="fas fa-chart-line"></i> রিপোর্ট</a>
+                <hr class="my-4 border-green-700"><a href="#" onclick="logout()" class="block p-2 rounded hover:bg-red-600"><i class="fas fa-sign-out-alt"></i> লগআউট</a>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <h1 class="font-siyam text-2xl font-bold">ড্যাশবোর্ড</h1>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-white p-4 rounded shadow"><i class="fas fa-shopping-cart text-2xl text-blue-500"></i><p class="text-2xl font-bold">156</p><p>মোট অর্ডার</p></div>
+                <div class="bg-white p-4 rounded shadow"><i class="fas fa-taka-sign text-2xl text-green-500"></i><p class="text-2xl font-bold">৳১,২৫,৬০০</p><p>মোট আয়</p></div>
+                <div class="bg-white p-4 rounded shadow"><i class="fas fa-store text-2xl text-purple-500"></i><p class="text-2xl font-bold">12</p><p>একটিভ ভেন্ডর</p></div>
+                <div class="bg-white p-4 rounded shadow"><i class="fas fa-users text-2xl text-orange-500"></i><p class="text-2xl font-bold">458</p><p>কাস্টমার</p></div>
+            </div>
+            <div class="bg-white rounded shadow mt-4"><div class="p-4 border-b"><h2 class="font-semibold">সাম্প্রতিক অর্ডার</h2></div><div class="p-4 text-center text-gray-500">অর্ডার লিস্ট এখানে দেখাবে</div></div>
+        </div>
+    </div>
+    <script>
+        if (localStorage.getItem('adminLoggedIn') !== 'true') window.location.href = '/pages/admin-login.html';
+        function logout() { localStorage.removeItem('adminLoggedIn'); window.location.href = '/'; }
+    </script>
+</body>
+</html>

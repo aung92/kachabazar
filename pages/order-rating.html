@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><title>অর্ডার রেটিং - কাঁচাবাজার</title><link rel="stylesheet" href="/css/font.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto p-4">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h1 class="font-siyam text-2xl font-bold text-center"><i class="fas fa-star text-yellow-500"></i> অর্ডার রেটিং</h1>
+            <p class="text-center text-gray-500">আপনার অভিজ্ঞতা জানাতে নিচের ফর্মটি পূরণ করুন</p>
+            
+            <div class="mt-6"><label class="block font-hind">অর্ডার আইডি</label><input type="text" id="orderId" class="w-full border rounded-lg p-2" placeholder="যেমন: ORD-001"></div>
+            <div class="mt-3"><label class="block font-hind">পণ্যের নাম</label><input type="text" id="productName" class="w-full border rounded-lg p-2" placeholder="যেমন: পটল, ইলিশ"></div>
+            
+            <div class="mt-3"><label class="block font-hind">পণ্যের রেটিং</label><div class="flex gap-2 text-3xl" id="productStars"><span class="cursor-pointer hover:text-yellow-500" onclick="setProductRating(1)">☆</span><span onclick="setProductRating(2)">☆</span><span onclick="setProductRating(3)">☆</span><span onclick="setProductRating(4)">☆</span><span onclick="setProductRating(5)">☆</span></div><input type="hidden" id="productRating" value="0"></div>
+            
+            <div class="mt-3"><label class="block font-hind">ডেলিভারি রেটিং</label><div class="flex gap-2 text-3xl" id="deliveryStars"><span onclick="setDeliveryRating(1)">☆</span><span onclick="setDeliveryRating(2)">☆</span><span onclick="setDeliveryRating(3)">☆</span><span onclick="setDeliveryRating(4)">☆</span><span onclick="setDeliveryRating(5)">☆</span></div><input type="hidden" id="deliveryRating" value="0"></div>
+            
+            <div class="mt-3"><label class="block font-hind">আপনার মতামত</label><textarea id="review" rows="3" class="w-full border rounded-lg p-2" placeholder="আপনার অভিজ্ঞতা লিখুন..."></textarea></div>
+            
+            <button onclick="submitRating()" class="w-full mt-4 bg-green-600 text-white py-2 rounded font-semibold">রেটিং সাবমিট করুন</button>
+            <div class="text-center mt-3"><a href="/pages/dashboard.html" class="text-green-600 text-sm">← ড্যাশবোর্ডে ফিরুন</a></div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow mt-4 p-4"><h3 class="font-semibold">📝 আপনার দেওয়া রেটিংসমূহ</h3><div id="userReviews" class="mt-2 space-y-2 text-sm"></div></div>
+    </div>
+    <script>let productStar=0,deliveryStar=0,userReviews=[];function setProductRating(r){productStar=r;const stars=document.getElementById('productStars').children;for(let i=0;i<stars.length;i++)stars[i].innerHTML=i<r?'★':'☆';document.getElementById('productRating').value=r;}function setDeliveryRating(r){deliveryStar=r;const stars=document.getElementById('deliveryStars').children;for(let i=0;i<stars.length;i++)stars[i].innerHTML=i<r?'★':'☆';document.getElementById('deliveryRating').value=r;}function submitRating(){const orderId=document.getElementById('orderId').value,productName=document.getElementById('productName').value,review=document.getElementById('review').value;if(!orderId||!productName||productStar===0||deliveryStar===0){alert('সব তথ্য পূরণ করুন');return;}userReviews.unshift({orderId,productName,productRating:productStar,deliveryRating:deliveryStar,review,date:new Date().toLocaleDateString('bn-BD')});document.getElementById('userReviews').innerHTML=userReviews.map(r=>`<div class="border-b pb-2"><p><strong>${r.orderId}</strong> - ${r.productName}</p><p>⭐ পণ্য: ${r.productRating}/5 | 🚚 ডেলিভারি: ${r.deliveryRating}/5</p><p class="text-gray-500 text-xs">${r.date}</p><p class="text-sm">"${r.review || 'কোনো মন্তব্য নেই'}"</p></div>`).join('');alert('ধন্যবাদ! আপনার রেটিং জমা হয়েছে।');document.getElementById('orderId').value='';document.getElementById('productName').value='';document.getElementById('review').value='';setProductRating(0);setDeliveryRating(0);}</script>
+</body>
+</html>
